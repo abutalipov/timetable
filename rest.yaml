@@ -1,0 +1,825 @@
+openapi: 3.0.0
+info:
+  title: timetable
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000/api'
+paths:
+  /login:
+    post:
+      summary: Авторизация
+      operationId: post-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiI4MWVkNThhYzU4Yzg2NDM3YjljNWU0OTgxMWRjNGUyNDk2YjZmZTczNGRiM2FmZTU1MzIwZTE4ZjJjMDQyOGM2IiwiZXhwIjoxNTk0MDM3MDQ1fQ.yq3LL7dd4yinzqHFnsP3u2UBryAJOln5atOz0gekUsQ
+                    ts: '2020-06-06T12:04:05+00:00'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  login: abootis@ya.ru
+                  password: password
+  /logout:
+    get:
+      summary: Деактиваци токена авторизации
+      tags: []
+      responses: {}
+      operationId: get-logout
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+  /location:
+    get:
+      summary: Список кабинетов
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      - id: 1
+                        title: '1341'
+                        description: музыкс класс
+                      - id: 2
+                        title: '101'
+                        description: музыкальный класс класс
+                    ts: '2020-06-06T09:18:52+00:00'
+      operationId: get-location
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    post:
+      summary: Добавить кабинет
+      operationId: post-location
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      location_id: 2
+                    ts: '2020-06-03T17:02:41+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  title: '101'
+                  description: музыкальный класс класс
+  '/location/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Удалить кабинет
+      operationId: delete-location-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: error
+                    api_code: 7
+                    message: Объект не удалось удалить
+                    ts: '2020-06-06T09:14:53+00:00'
+                example-2:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T09:22:03+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    put:
+      summary: Обновить данные кабинета
+      operationId: put-location-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T09:18:48+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  title: '1341'
+                  description: музыкс класс
+  /group:
+    get:
+      summary: Получить список групп
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      - id: 1
+                        title: '1341'
+                        date: '2020-05-05'
+                    ts: '2020-06-06T09:21:45+00:00'
+      operationId: get-group
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    post:
+      summary: Добавиь группу
+      operationId: post-group
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      group_id: 2
+                    ts: '2020-06-06T09:21:58+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  title: исит
+                  date: '2001-02-15'
+  '/group/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Удалить группу
+      operationId: delete-group-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T09:22:03+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    put:
+      summary: Редактировать группу
+      operationId: put-group-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T09:21:41+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  title: '1341'
+                  date: '2020-05-05'
+  /occupation:
+    get:
+      summary: Список дисциплин
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      - id: 1
+                        title: '1341'
+                        slug: '1341'
+                      - id: 2
+                        title: Математика
+                        slug: matematika
+                      - id: 4
+                        title: мир
+                        slug: mir
+                    ts: '2020-06-06T09:26:02+00:00'
+      operationId: get-occupation
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    post:
+      summary: Добавить дисциплину
+      operationId: post-occupation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      occupation_id: 4
+                    ts: '2020-06-06T09:24:54+00:00'
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  title: мир
+  '/occupation/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Удалить дисципину
+      operationId: delete-occupation-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T09:24:29+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    put:
+      summary: Редактировать дисциплину
+      operationId: put-occupation-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T09:25:59+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  title: '1341'
+  /timetable:
+    get:
+      summary: Список расписаний
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      - id: 1
+                        time_start: '10:00:00'
+                        time_end: '11:00:00'
+                        event_date: '2020-06-05'
+                        user_id: 1
+                        group_id: 1
+                        location_id: 1
+                        occupation_id: 1
+                        user:
+                          id: 1
+                          first_name: Абуталипов
+                          second_name: Ильдар
+                          patronymic: Сафиевич
+                          email: abootis@ya.ru
+                          email_verified_at: null
+                          created_at: null
+                          updated_at: null
+                          deleted_at: null
+                        group:
+                          id: 1
+                          title: '1341'
+                          date: '2020-05-05'
+                        location:
+                          id: 1
+                          title: '1341'
+                          description: музыкс класс
+                        occupation:
+                          id: 1
+                          title: '1341'
+                          slug: '1341'
+                      - id: 2
+                        time_start: '09:30:00'
+                        time_end: '10:00:00'
+                        event_date: '2020-06-05'
+                        user_id: 1
+                        group_id: 1
+                        location_id: 1
+                        occupation_id: 2
+                        user:
+                          id: 1
+                          first_name: Абуталипов
+                          second_name: Ильдар
+                          patronymic: Сафиевич
+                          email: abootis@ya.ru
+                          email_verified_at: null
+                          created_at: null
+                          updated_at: null
+                          deleted_at: null
+                        group:
+                          id: 1
+                          title: '1341'
+                          date: '2020-05-05'
+                        location:
+                          id: 1
+                          title: '1341'
+                          description: музыкс класс
+                        occupation:
+                          id: 2
+                          title: Математика
+                          slug: matematika
+                    ts: '2020-06-06T09:30:25+00:00'
+      operationId: get-timetable
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    post:
+      summary: Добавить расписание
+      operationId: post-timetable
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      timetable_id: 2
+                    ts: '2020-06-05T16:22:49+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              example-1:
+                value:
+                  time_start: '09:30'
+                  time_end: '10:00'
+                  event_date: '2020-06-05'
+                  user_id: 1
+                  group_id: 1
+                  location_id: 1
+                  occupation_id: 2
+  '/timetable/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Удалить расписание
+      operationId: delete-timetable-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ts:
+                    type: string
+                  status:
+                    type: string
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    put:
+      summary: Редактировать расписание
+      operationId: put-timetable-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ts:
+                    type: string
+                  status:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T12:01:57+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                time_start:
+                  type: string
+                time_end:
+                  type: string
+                event_date:
+                  type: string
+                user_id:
+                  type: string
+                group_id:
+                  type: string
+                location_id:
+                  type: string
+                occupation_id:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  time_start: '09:30'
+                  time_end: '10:00'
+                  event_date: '2020-12-05'
+                  user_id: 1
+                  group_id: 1
+                  location_id: 1
+                  occupation_id: 4
+  /user:
+    get:
+      summary: список пользователей
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        first_name:
+                          type: string
+                        second_name:
+                          type: string
+                  ts:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      - id: 1
+                        first_name: admin
+                        second_name: Ильдар
+                        patronymic: Сафиевич
+                        email: abootis@ya.ru
+                        email_verified_at: null
+                        created_at: null
+                        updated_at: '2020-06-06T12:17:50.000000Z'
+                        deleted_at: null
+                    ts: '2020-06-06T12:19:56+00:00'
+      operationId: get-user
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    post:
+      summary: Добавить пользователя
+      operationId: post-user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      user_id:
+                        type: string
+                  ts:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    data:
+                      user_id: 3
+                    ts: '2020-06-06T12:19:42+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                second_name:
+                  type: string
+                patronymic:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  first_name: admin
+                  second_name: Ильдар
+                  patronymic: Сафиевич
+                  password: password
+                  email: efw@ya.ru
+        description: ''
+  '/user/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Удалить пользователя
+      operationId: delete-user-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  ts:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T12:19:54+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+    put:
+      summary: Редактировать пользователя
+      operationId: put-user-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  ts:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    status: ok
+                    ts: '2020-06-06T12:17:50+00:00'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                second_name:
+                  type: string
+                patronymic:
+                  type: string
+                email:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  first_name: admin
+                  second_name: Ильдар
+                  patronymic: Сафиевич
+                  email: abootis@ya.ru
+                  email_verified_at: null
+                  created_at: null
+                  updated_at: null
+                  deleted_at: null
+components:
+  schemas: {}

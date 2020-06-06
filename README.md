@@ -19,3 +19,5 @@
     в любом запросе к api должен присутствовать заголовок Content-Type с значением application/json
     
     для отладки рекомендуется использовать по Insomnia
+    для работы с документацией API используется либо веб ресурс https://editor.swagger.io/ либо ПО stoplight
+    REST API находится в файле rest.yaml
